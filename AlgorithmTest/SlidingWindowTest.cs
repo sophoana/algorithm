@@ -8,6 +8,24 @@ namespace Tests
     public class SlidingWindowTest
     {
         
+        public int DietPlanPerformance(int[] calories, int k, int lower, int upper)
+        {
+            int tail = 0;
+            int sum = calories.Take(k).Sum();
+            int result = 0;
+            
+            for (int i = k; i < calories.Length; i++)
+            {
+                int cur = sum;
+                if (cur > upper) result++;
+                else if (cur < lower) result--;
+
+                sum = sum - calories[i - k] + calories[i];
+            }
+
+            return result;
+        }
+        
         public int FindContentChildren(int[] g, int[] s) {
             // https://leetcode.com/problems/assign-cookies/
             int answer = 0;
