@@ -17,8 +17,32 @@ namespace Tests
 
             return 0;
         }
-        
-        public int MaxDistance(IList<IList<int>> arrays) {
+
+        public int MinCost(int[][] costs)
+        {
+            //https://leetcode.com/problems/paint-house/
+            if (costs.Length == 0) return 0;
+
+            var lastR = costs[0][0];
+            var lastG = costs[0][1];
+            var lastB = costs[0][2];
+
+            for (int i = 1; i < costs.Length; i++)
+            {
+                var currentR = Math.Min(lastB, lastG) + costs[i][0];
+                var currentG = Math.Min(lastB, lastR) + costs[i][1];
+                var currentB = Math.Min(lastG, lastR) + costs[i][2];
+
+                lastR = currentR;
+                lastG = currentG;
+                lastB = currentB;
+            }
+
+            return Math.Min(Math.Min(lastG, lastB), lastR);
+        }
+
+        public int MaxDistance(IList<IList<int>> arrays)
+        {
             //https://leetcode.com/problems/maximum-distance-in-arrays/
             int min = 10001;
             int max = -10001;
@@ -40,6 +64,7 @@ namespace Tests
             var result = LongestOnes(intput, k);
             Assert.True(6 == result);
         }
+
         public int LongestOnes(int[] A, int K)
         {
             //https://leetcode.com/problems/max-consecutive-ones-iii/
@@ -48,7 +73,7 @@ namespace Tests
             for (j = 0; j < A.Length; j++)
             {
                 if (A[j] == 0) K--;
-                if (K < 0 && A[i++] ==0) K++;
+                if (K < 0 && A[i++] == 0) K++;
             }
 
             return j - i;
