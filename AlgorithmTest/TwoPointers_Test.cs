@@ -1,5 +1,4 @@
-﻿using System;
-namespace AlgorithmTest
+﻿namespace AlgorithmTest
 {
     public class TwoPointers_Test
     {

@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Numerics;
 using Xunit;
 
 namespace Tests
@@ -10,7 +9,7 @@ namespace Tests
         
         public int DietPlanPerformance(int[] calories, int k, int lower, int upper)
         {
-            int tail = 0;
+            // int tail = 0;
             int sum = calories.Take(k).Sum();
             int result = 0;
             
@@ -80,23 +79,23 @@ namespace Tests
 
             return A;
 
-            int FindMax(int[] arr, int idx, int f)
-            {
-                int idxMax = 0;
-                int curMax = 0;
-                while (idx <= arr.Length)
-                {
-                    if (arr[idx] > curMax)
-                    {
-                        curMax = arr[idx];
-                        idxMax = idx;
-                    }
-
-                    idx++;
-                }
-
-                return idxMax;
-            }
+            // int FindMax(int[] arr, int idx, int f)
+            // {
+            //     int idxMax = 0;
+            //     int curMax = 0;
+            //     while (idx <= arr.Length)
+            //     {
+            //         if (arr[idx] > curMax)
+            //         {
+            //             curMax = arr[idx];
+            //             idxMax = idx;
+            //         }
+            //
+            //         idx++;
+            //     }
+            //
+            //     return idxMax;
+            // }
 
             int FindIdx(int[] arr)
             {
@@ -110,12 +109,12 @@ namespace Tests
                 return idx;
             }
 
-            void Swap(int[] arr, int i, int j)
-            {
-                int tmp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = tmp;
-            }
+            // void Swap(int[] arr, int i, int j)
+            // {
+            //     int tmp = arr[i];
+            //     arr[i] = arr[j];
+            //     arr[j] = tmp;
+            // }
         }
 
         public bool IsMonotonic(int[] A)

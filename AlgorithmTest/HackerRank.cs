@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework.Internal;
 using Xunit;
 
 namespace AlgorithmTest
@@ -104,7 +103,7 @@ namespace AlgorithmTest
         }
 
 
-        public static List<long> getMaxArea(int w, int h, List<bool> boundaryType, List<int> boundaryDist)
+        private static List<long> getMaxArea(int w, int h, List<bool> boundaryType, List<int> boundaryDist)
         {
             if (boundaryDist.Count != boundaryType.Count)
                 return new List<long>();

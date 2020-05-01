@@ -1,9 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using NUnit.Framework;
 using Xunit;
 using Assert = Xunit.Assert;
 
@@ -243,6 +241,24 @@ namespace AlgorithmTest
         #endregion
     }
 
+    public class NodeFactory
+    {
+        public static ListNode CreateNode(IList<int> nums)
+        {
+            ListNode node = new ListNode(0);
+            ListNode sentinel = node;
+            if (nums == null || !nums.Any())
+                return null;
+            
+            foreach (var num in nums)
+            {
+                node.next = new ListNode(num);
+                node = node.next;
+            }
+            return sentinel.next;
+        }
+    }
+    
     public class ListNode
     {
         public int val;
