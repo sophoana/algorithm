@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using NUnit.Framework;
 using Xunit;
 using Assert = Xunit.Assert;
 

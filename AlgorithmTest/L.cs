@@ -2,11 +2,38 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 using Assert = Xunit.Assert;
 
 namespace AlgorithmTest
 {
+    public static class LeetCodeUtil
+    {
+        static readonly HttpClient client = new HttpClient();
+
+
+        // Gets input string from leetcode api
+        public static async Task<string> GetString(string url)
+        {
+            try
+            {
+                var response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+                var responseBody = await response.Content.ReadAsStringAsync();
+
+                return responseBody;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return string.Empty;
+            }
+        }
+    }
+    
     public class L
     {
         #region Add Binary
@@ -221,6 +248,85 @@ namespace AlgorithmTest
 
         #region Region
 
+        public int StairCounting(int n)
+        {
+            if (n <= 2) return n;
+            return StairCounting(n - 1) + StairCounting(n - 2);
+        }
+
+        [Fact]
+        public void Test_StairCounting()
+        {
+            var one = StairCounting(4);
+            var two = StairCounting(5);
+            var three = StairCounting(6);
+            var five = StairCounting(9);
+            var four = StairCounting(10);
+        }
+        
+        public string IntToRoman(int num) {
+            int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};    
+            string[] symbols = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
+
+            var sb = new StringBuilder();
+            for(int i=0; i<values.Length; i++){
+                while(values[i] <= num){
+                    num -= values[i];
+                    sb.Append(symbols[i]);
+                }
+            }
+
+            return sb.ToString();
+        }
+        
+
+        //https://leetcode.com/problems/roman-to-integer/solution/
+        public int RomanToInt(string s) {
+            var map = new Dictionary<string, int>()
+            {
+                {"M", 1000}, {"D", 500}, {"C", 100}, {"L", 50}, {"X", 10}, {"V", 5}, {"I", 1}
+            };
+
+            int sum = 0;
+            int i = 0;
+            while (i < s.Length)
+            {
+                string currentSymbol = s.Substring(i, 1);
+                int currentValue = map[currentSymbol];
+                int nextValue = 0;
+
+                if (i + 1 < s.Length)
+                {
+                    string nextSymbol = s.Substring(i + 1, 1);
+                    nextValue = map[nextSymbol];
+                }
+
+                if (currentValue >= nextValue)
+                {
+                    sum += currentValue;
+                    i++;
+                }
+                else
+                {
+                    sum = sum + (nextValue - currentValue);
+                    i += 2;
+                }
+            }
+
+            return sum;
+        }
+
+        [Fact]
+        public void Test_RomanToInt()
+        {
+            var input = "MCMXCIV";// "MMCMLXXXIX";
+            var expected = 1994; //2989;
+            Assert.Equal(expected, RomanToInt(input));
+            Assert.Equal(2989, RomanToInt("MMCMLXXXIX"));
+            Assert.Equal(3, RomanToInt("III"));
+            Assert.Equal(9, RomanToInt("IX"));
+        }
+        
         public int ClimbStairs(int n)
         {
             if (n == 1)

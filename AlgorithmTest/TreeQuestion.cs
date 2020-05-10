@@ -2,13 +2,13 @@ namespace AlgorithmTest
 {
     public class TreeNode
     {
-        public int Val;
-        public TreeNode Left;
-        public TreeNode Right;
+        public int val;
+        public TreeNode left;
+        public TreeNode right;
 
         public TreeNode(int x)
         {
-            Val = x;
+            val = x;
         }
     }
 
@@ -24,11 +24,11 @@ namespace AlgorithmTest
             void dfs(TreeNode node)
             {
                 if (node == null) return;
-                dfs(node.Left);
-                if (prev != null) FindMin(ans, node.Val - prev.Value);
+                dfs(node.left);
+                if (prev != null) FindMin(ans, node.val - prev.Value);
 
-                prev = node.Val;
-                dfs(node.Right);
+                prev = node.val;
+                dfs(node.right);
 
             }
 
